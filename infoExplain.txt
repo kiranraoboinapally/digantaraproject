@@ -1,0 +1,36 @@
+Why Use Heuristics?
+1.Data Characteristics: If the SMA data is relatively simple or if historical data indicates that changes are usually clear-cut and can be reasonably detected with a heuristic, it makes sense to start with this approach.
+2.Resource Constraints: Heuristic methods are generally less resource-intensive and faster to implement. If you're working with limited computational resources or time constraints, a heuristic approach might be more practical.
+3.Initial Analysis: Heuristic methods can serve as an initial analysis tool. Once you have more insights into the data or if the initial approach shows limitations, you can explore more sophisticated methods.
+4.Interpretability: Heuristic methods are often easier to interpret and explain to stakeholders compared to complex models, making them a good choice for initial analyses and presentations.
+In summary, the heuristic approach used in the code is a practical, straightforward method for detecting maneuvers in SMA data. Depending on the results and the specific requirements of your analysis, you may choose to explore more advanced methods if needed.  
+
+Difference between two codes 
+
+**sma1
+
+1.Threshold Calculation:
+   - Uses a fixed threshold (mean + 3 standard deviations).
+
+2.Flexibility:
+   - Static and less adaptable to different datasets.
+
+3.Complexity:
+   - Simpler to implement.
+
+4.Optimization:
+   - Fixed threshold may not be optimal for all scenarios.
+
+**sma2
+
+1.Threshold Calculation:
+   - Uses a grid search to determine the optimal threshold by evaluating various values.
+
+2.Flexibility:
+   - More adaptable, adjusts dynamically to the dataset.
+
+3.Complexity:
+   - More complex due to grid search and function for maneuver detection.
+
+4.Optimization:
+   - Aims to find the best threshold, potentially improving accuracy.
