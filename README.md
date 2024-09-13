@@ -53,7 +53,7 @@ For demonstration purposes, synthetic labels are created using a simple heuristi
 
    ```bash
    git clone https://github.com/kiranraoboinapally/digantaraproject.git
-   cd digantara-project
+   cd digantaraproject
    ```
 
 2. **Install Dependencies:**
