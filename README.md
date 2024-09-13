@@ -99,9 +99,7 @@ The main script for this project is `useML.py`. It includes:
 2. **Label Column:** Assumes availability of a label column; synthetic labels are used here for demonstration.
 3. **Model Suitability:** Assumes that the Random Forest Classifier is suitable for the task.
 
-## Contributing
 
-Feel free to contribute by submitting issues or pull requests. Your feedback and suggestions are welcome!
 
 
 ---
