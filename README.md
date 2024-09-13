@@ -105,7 +105,7 @@ Feel free to contribute by submitting issues or pull requests. Your feedback and
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [useML.py](useML.py) file for details.
 
 ---
 
