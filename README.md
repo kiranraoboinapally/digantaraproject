@@ -1,7 +1,7 @@
 # DigantaraProject
 This is an Assessment for Data Science Intern in Digantara
 
-Here's a concise summary about the methods used in my code:
+Concise summary about the methods used in my code:
 
 ---
 
