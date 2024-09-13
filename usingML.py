@@ -152,7 +152,27 @@ def plot_results(df, features):
     plt.grid(True)
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.show()
+    
+    # Save plot to file
+    plt.savefig('graphOutput.png')
+
+def save_maneuver_dates(maneuver_dates):
+    """
+    Save the detected maneuver dates to a PNG file.
+    
+    Parameters:
+    maneuver_dates (pd.DataFrame): DataFrame with dates of detected maneuvers.
+    """
+    plt.figure(figsize=(10, 6))
+    plt.table(cellText=maneuver_dates.values,
+              colLabels=maneuver_dates.columns,
+              cellLoc='center',
+              loc='center',
+              edges='closed')
+    plt.axis('off')
+    
+    # Save table to file
+    plt.savefig('datesOutput.png')
 
 # Main function
 def main():
@@ -171,6 +191,8 @@ def main():
     print(maneuver_dates)
     
     plot_results(df, features)
+    save_maneuver_dates(maneuver_dates)
 
 if __name__ == "__main__":
     main()
+
