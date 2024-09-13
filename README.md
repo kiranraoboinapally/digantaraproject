@@ -103,9 +103,6 @@ The main script for this project is `useML.py`. It includes:
 
 Feel free to contribute by submitting issues or pull requests. Your feedback and suggestions are welcome!
 
-## License
-
-This project is licensed under the MIT License. See the [useML.py](useML.py) file for details.
 
 ---
 
