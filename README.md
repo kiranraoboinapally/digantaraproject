@@ -8,7 +8,7 @@
 
 This project demonstrates a methodology for detecting maneuvers in orbital data using a Random Forest Classifier. It involves data preprocessing, feature extraction, model training, maneuver detection, and results visualization.
 
-## Methods Used
+## Methods Used (Why ML? or Heuristic)
 
 ### 1. Machine Learning
 - **Random Forest Classifier:**
