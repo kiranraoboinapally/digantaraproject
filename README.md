@@ -102,7 +102,7 @@ The main script `useML.py` includes:
 
 ## Assumptions
 
-- **Data Format:** Assumes CSV file with columns including `Datetime` and `SMA`.
+- **Data Format:** Having CSV file with columns including `Datetime` and `SMA`.
 - **Label Column:** Uses synthetic labels for demonstration; real data is preferred for actual use.
 - **Model Choice:** Random Forest Classifier is assumed suitable for the task.
 
