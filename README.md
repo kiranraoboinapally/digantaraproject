@@ -6,46 +6,44 @@
 
 ## Overview
 
-This project demonstrates how to detect maneuvers in orbital data using a Random Forest Classifier. The methodology involves data preprocessing, feature extraction, model training, maneuver detection, and visualization of results. The goal is to identify significant changes in the data that may indicate maneuvers.
+This project utilizes machine learning to detect maneuvers in orbital data with a Random Forest Classifier. The workflow includes data preprocessing, feature extraction, model training, maneuver detection, and result visualization. The aim is to identify significant changes in orbital data that may signify maneuvers.
 
 ## Why Machine Learning?
 
-### Advantages of Machine Learning (ML)
+### Advantages
 
-- **Adaptability:** ML models can capture complex patterns in the data that simple heuristic rules might miss.
-- **Robustness:** Random Forest Classifier combines multiple decision trees to enhance model performance and reduce overfitting.
-- **Feature Interaction:** ML models can automatically learn and evaluate the importance of different features and their interactions.
-- **Quantitative Evaluation:** ML provides performance metrics such as precision, recall, and F1-score, which offer a systematic way to assess model effectiveness.
-- **Scalability:** ML models can be retrained with new data, making them more adaptable to changes in data patterns.
+- **Adaptability:** Captures complex patterns beyond simple rules.
+- **Robustness:** Uses ensemble methods (Random Forest) to minimize overfitting.
+- **Feature Interaction:** Automatically assesses feature importance and interactions.
+- **Quantitative Metrics:** Provides performance metrics like precision, recall, and F1-score.
+- **Scalability:** Models can be updated with new data to adapt to evolving patterns.
 
 ### Heuristic Approach
 
-For demonstration purposes, synthetic labels are created using a simple heuristic (`SMA_diff_diff > 0.1`). While useful for illustration, real-world applications should use actual labeled data to train and evaluate models.
+The demonstration uses synthetic labels (`SMA_diff_diff > 0.1`). For practical applications, real labeled data should be used.
 
 ## Methodology
 
 1. **Data Preprocessing:**
-   - Load data from a CSV file.
-   - Convert the `Datetime` column to a datetime format.
-   - Create separate `Date` and `Month` columns for analysis.
+   - Load data from CSV.
+   - Convert `Datetime` to datetime format; extract `Date` and `Month`.
    - Drop the original `Datetime` column.
 
 2. **Feature Extraction:**
-   - Calculate additional features such as `SMA_diff` (difference of SMA) and `SMA_diff_diff` (second difference of SMA).
-   - Initialize a placeholder for labels.
+   - Compute additional features: `SMA_diff` and `SMA_diff_diff`.
+   - Initialize placeholders for labels.
 
 3. **Model Training:**
    - Generate synthetic labels for training.
-   - Train a Random Forest Classifier with the features and synthetic labels.
-   - Evaluate model performance using a classification report.
+   - Train a Random Forest Classifier and evaluate it.
+   - Predict maneuvers across the dataset.
 
 4. **Maneuver Detection:**
-   - Apply the trained model to predict maneuvers across the dataset.
-   - Extract dates with detected maneuvers and ensure only one maneuver per month is listed.
+   - Extract and list dates with detected maneuvers (one per month).
 
 5. **Results Visualization:**
-   - Plot SMA values over time.
-   - Highlight detected maneuvers on the plot.
+   - Plot SMA values and detected maneuvers.
+   - Save results as PNG files.
 
 ## Usage
 
@@ -58,7 +56,7 @@ For demonstration purposes, synthetic labels are created using a simple heuristi
 
 2. **Install Dependencies:**
 
-   Ensure you have Python 3.x installed, and then install the required libraries:
+   Ensure Python 3.x is installed. Install the required libraries:
 
    ```bash
    pip install pandas numpy scikit-learn matplotlib
@@ -66,12 +64,12 @@ For demonstration purposes, synthetic labels are created using a simple heuristi
 
 3. **Prepare Your Data:**
 
-   - Ensure your data is in a CSV file named `SMA_data.csv` with columns including `Datetime`, `SMA`, etc.
-   - Place this file in the root directory of the project.
+   - Ensure your data is in `SMA_data.csv` with columns including `Datetime`, `SMA`, etc.
+   - Place the file in the root directory of the project.
 
 4. **Run the Script:**
 
-   Execute the script to perform data preprocessing, model training, and visualization:
+   Execute the script to preprocess data, train the model, and generate visualizations:
 
    ```bash
    python useML.py
@@ -79,27 +77,49 @@ For demonstration purposes, synthetic labels are created using a simple heuristi
 
 5. **Review Results:**
 
-   - The script will print a classification report to the console.
-   - Detected maneuver dates will be displayed.
-   - A plot showing SMA values and detected maneuvers will be generated.
+   - **`graphOutput.png`**: A plot showing SMA values and detected maneuvers.
+   - **`datesOutput.png`**: A PNG file containing a table of detected maneuver dates.
 
-## Code
+## Code Overview
 
-The main script for this project is `useML.py`. It includes:
+The main script `useML.py` includes:
 
 - **Data Preprocessing:** Functions for loading and preparing data.
-- **Feature Extraction:** Functions for calculating necessary features.
-- **Model Training:** Function for training and evaluating the Random Forest model.
-- **Maneuver Detection:** Function for extracting and listing detected maneuvers.
-- **Visualization:** Function for plotting results.
+- **Feature Extraction:** Functions for calculating `SMA_diff` and `SMA_diff_diff`.
+- **Model Training:** Training and evaluating the Random Forest Classifier.
+- **Maneuver Detection:** Extracting and listing detected maneuvers.
+- **Visualization:** Plotting SMA values and maneuver detection results, and saving them as PNG files.
+
+### `useML.py` Script
+
+- **`load_data(file_path)`**: Loads and preprocesses the data.
+- **`preprocess_data(df)`**: Computes additional SMA features.
+- **`extract_features(df)`**: Prepares features for model training.
+- **`train_model(features, df)`**: Trains the Random Forest model and predicts maneuvers.
+- **`extract_maneuver_dates(df, features)`**: Extracts dates where maneuvers are detected.
+- **`plot_results(df, features)`**: Plots SMA values and saves the plot to `graphOutput.png`.
+- **`save_maneuver_dates(maneuver_dates)`**: Saves detected maneuver dates to `datesOutput.png`.
 
 ## Assumptions
 
-1. **Data Format:** Assumes the dataset is in CSV format with appropriate columns.
-2. **Label Column:** Assumes availability of a label column; synthetic labels are used here for demonstration.
-3. **Model Suitability:** Assumes that the Random Forest Classifier is suitable for the task.
+- **Data Format:** Assumes CSV file with columns including `Datetime` and `SMA`.
+- **Label Column:** Uses synthetic labels for demonstration; real data is preferred for actual use.
+- **Model Choice:** Random Forest Classifier is assumed suitable for the task.
 
+## Future Work
 
+- **Real Data Integration:** Use actual labeled data for training and evaluation.
+- **Model Optimization:** Explore hyperparameter tuning and alternative models.
+- **Feature Enhancement:** Investigate additional features and data sources.
+
+## Contact
+
+For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+
+## Acknowledgments
+
+- **Data Source:** Thanks to [source name] for providing the dataset.
+- **Libraries:** Utilizes Pandas, NumPy, scikit-learn, and Matplotlib for data processing and visualization.
 
 
 ---
