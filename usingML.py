@@ -16,7 +16,7 @@ def load_data(file_path):
     # Create separate Date and Time columns
     df['Date'] = df['Datetime'].dt.date
     
-    # Drop the original DateTime column and Time column
+    # Drop the original DateTime column
     df.drop(['Datetime'], axis=1, inplace=True)
     
     return df
@@ -33,13 +33,18 @@ def extract_features(df):
     features['SMA_diff'] = df['SMA_diff']
     features['SMA_diff_diff'] = df['SMA_diff_diff']
     
-    # Placeholder for label assignment
-    features['label'] = np.where(features['SMA_diff_diff'] > 0.1, 1, 0)  # Example heuristic: change threshold as needed
+    # Placeholder for labels (for training the model)
+    features['label'] = np.nan  # Initialize with NaN as we will not use heuristics for labeling
     
     return features
 
 # Maneuver Detection with Machine Learning
-def train_model(features):
+def train_model(features, df):
+    # In this case, we'll need labeled data to train our model. For this example, 
+    # I'll create synthetic labels for the purpose of demonstration.
+    # In a real-world scenario, you should use actual labeled data for training.
+    features['label'] = np.where(features['SMA_diff_diff'] > 0.1, 1, 0)  # Synthetic label for illustration
+    
     X = features[['SMA', 'SMA_diff', 'SMA_diff_diff']]
     y = features['label']
     
@@ -99,7 +104,7 @@ def main():
     df = preprocess_data(df)
     features = extract_features(df)
     
-    features = train_model(features)
+    features = train_model(features, df)
     
     maneuver_dates = extract_maneuver_dates(df, features)
     print("Dates where maneuvers are detected:")
@@ -109,3 +114,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
