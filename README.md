@@ -21,4 +21,3 @@ Here's a concise summary for a presentation slide about the methods used in your
 
 ---
 
-This summary explains the use of machine learning for model training and detection, and the heuristic approach for generating synthetic labels.
