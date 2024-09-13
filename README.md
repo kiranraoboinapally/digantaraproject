@@ -114,12 +114,18 @@ The main script `useML.py` includes:
 
 ## Contact
 
-For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or support, please contact [kiranraoboinapally@gmail.com](mailto:kiranraoboinapally@gmail.com).
+
 
 ## Acknowledgments
 
-- **Data Source:** Thanks to [source name] for providing the dataset.
-- **Libraries:** Utilizes Pandas, NumPy, scikit-learn, and Matplotlib for data processing and visualization.
+- **Data Source:** The dataset used in this project is a synthetic dataset provided as part of the assignment. It is used here for illustrative purposes only.
+
+- **Libraries:** This project utilizes several key libraries:
+  - **Pandas**: For data manipulation and analysis. [Pandas Documentation](https://pandas.pydata.org/)
+  - **NumPy**: For numerical operations and handling arrays. [NumPy Documentation](https://numpy.org/)
+  - **scikit-learn**: For machine learning algorithms and model evaluation. [scikit-learn Documentation](https://scikit-learn.org/)
+  - **Matplotlib**: For data visualization and plotting. [Matplotlib Documentation](https://matplotlib.org/)
 
 
 ---
