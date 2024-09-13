@@ -1,79 +1,113 @@
  Assessment Project for the Data Science Intern Role at Digantara:
 
-
 ---
 
 # Digantara Project: Maneuver Detection using Machine Learning
 
 ## Overview
 
-This project demonstrates a methodology for detecting maneuvers in orbital data using a Random Forest Classifier. The approach includes data preprocessing, feature extraction, model training, maneuver detection, and results visualization.
+This project demonstrates how to detect maneuvers in orbital data using a Random Forest Classifier. The methodology involves data preprocessing, feature extraction, model training, maneuver detection, and visualization of results. The goal is to identify significant changes in the data that may indicate maneuvers.
 
-## Methods Used
+## Why Machine Learning?
 
-### 1. Machine Learning
+### Advantages of Machine Learning (ML)
 
-- **Random Forest Classifier:**
-  - **Purpose:** To detect maneuvers based on features extracted from the data.
-  - **Why:** It enhances accuracy and robustness by combining multiple decision trees, which is particularly useful for complex classification tasks.
-  - **How:** The model is trained on features such as `SMA`, `SMA_diff`, and `SMA_diff_diff` to predict maneuver labels (`predicted_label`).
+- **Adaptability:** ML models can capture complex patterns in the data that simple heuristic rules might miss.
+- **Robustness:** Random Forest Classifier combines multiple decision trees to enhance model performance and reduce overfitting.
+- **Feature Interaction:** ML models can automatically learn and evaluate the importance of different features and their interactions.
+- **Quantitative Evaluation:** ML provides performance metrics such as precision, recall, and F1-score, which offer a systematic way to assess model effectiveness.
+- **Scalability:** ML models can be retrained with new data, making them more adaptable to changes in data patterns.
 
-### 2. Heuristic
+### Heuristic Approach
 
-- **Synthetic Labeling:**
-  - **Purpose:** To create illustrative labels for model training when actual labeled data is unavailable.
-  - **Why:** Demonstrates model training and evaluation. In practice, actual labeled data should be used.
-  - **How:** Labels are generated with a rule where `SMA_diff_diff > 0.1` is considered a maneuver (label = 1).
-
-## Assumptions
-
-1. **Presence of Label Column:** Assumes the dataset has a `'true_label'` column for proper model training. Without this, training is not feasible.
-2. **Synthetic Labeling:** Uses synthetic labels for demonstration. Real labeled data is required for actual training and evaluation.
-3. **Data Format and Integrity:** Assumes the dataset is in CSV format with columns like `'Datetime'` and `'SMA'`, and that data conversion/calculations are accurate.
-4. **Model Suitability:** Assumes the Random Forest Classifier is appropriate for this task and that the chosen features are relevant.
-5. **Data Distribution and Splitting:** Assumes the data split (using seed 42) is representative of the overall distribution.
+For demonstration purposes, synthetic labels are created using a simple heuristic (`SMA_diff_diff > 0.1`). While useful for illustration, real-world applications should use actual labeled data to train and evaluate models.
 
 ## Methodology
 
-### 1. Data Preprocessing
-- **Loading Data:** Load data from a CSV file. Convert the `'Datetime'` column to datetime format and create separate `'Date'` and `'Month'` columns.
-- **Feature Engineering:** Compute features like `SMA_diff` (difference of SMA) and `SMA_diff_diff` (second difference of SMA).
+1. **Data Preprocessing:**
+   - Load data from a CSV file.
+   - Convert the `Datetime` column to a datetime format.
+   - Create separate `Date` and `Month` columns for analysis.
+   - Drop the original `Datetime` column.
 
-### 2. Feature Extraction
-- **Features:** Extract `SMA`, `SMA_diff`, and `SMA_diff_diff` into a DataFrame, initially with placeholder labels.
+2. **Feature Extraction:**
+   - Calculate additional features such as `SMA_diff` (difference of SMA) and `SMA_diff_diff` (second difference of SMA).
+   - Initialize a placeholder for labels.
 
-### 3. Model Training
-- **Synthetic Label Creation:** Generate synthetic labels using a threshold (`SMA_diff_diff > 0.1`) for demonstration purposes.
-- **Model Building:** Train a Random Forest Classifier on these features and synthetic labels. Evaluate the model's performance using a classification report.
+3. **Model Training:**
+   - Generate synthetic labels for training.
+   - Train a Random Forest Classifier with the features and synthetic labels.
+   - Evaluate model performance using a classification report.
 
-### 4. Maneuver Detection
-- **Prediction:** Apply the trained model to predict labels across the entire dataset.
-- **Extraction:** Identify and list dates of detected maneuvers.
+4. **Maneuver Detection:**
+   - Apply the trained model to predict maneuvers across the dataset.
+   - Extract dates with detected maneuvers and ensure only one maneuver per month is listed.
 
-### 5. Results Visualization
-- **Plotting:** Create visualizations showing SMA values over time and highlight detected maneuvers.
+5. **Results Visualization:**
+   - Plot SMA values over time.
+   - Highlight detected maneuvers on the plot.
 
-## Results
+## Usage
 
-- **Classification Report:** Provides metrics such as precision, recall, and F1-score to evaluate model performance.
-- **Detected Maneuvers:** Lists dates where maneuvers are detected, showcasing significant changes in the data.
+1. **Clone the Repository:**
 
-## Analysis
+   ```bash
+   git clone https://github.com/kiranraoboinapally/digantaraproject.git
+   cd digantara-project
+   ```
 
-- **Model Performance:** Evaluates accuracy and suggests that adjustments to thresholds or model parameters could enhance performance.
-- **Visual Insights:** Provides visual confirmation of detected maneuvers, aiding in the validation of detected events.
+2. **Install Dependencies:**
 
-## Conclusion
+   Ensure you have Python 3.x installed, and then install the required libraries:
 
-This project provides a structured approach for detecting maneuvers using machine learning. While synthetic labels were used in this demonstration, the methodology is adaptable for practical applications with real labeled data.
+   ```bash
+   pip install pandas numpy scikit-learn matplotlib
+   ```
 
-## Python Code
+3. **Prepare Your Data:**
 
-For the complete code used in this project, please refer to the `useML.py` file.
+   - Ensure your data is in a CSV file named `SMA_data.csv` with columns including `Datetime`, `SMA`, etc.
+   - Place this file in the root directory of the project.
+
+4. **Run the Script:**
+
+   Execute the script to perform data preprocessing, model training, and visualization:
+
+   ```bash
+   python useML.py
+   ```
+
+5. **Review Results:**
+
+   - The script will print a classification report to the console.
+   - Detected maneuver dates will be displayed.
+   - A plot showing SMA values and detected maneuvers will be generated.
+
+## Code
+
+The main script for this project is `useML.py`. It includes:
+
+- **Data Preprocessing:** Functions for loading and preparing data.
+- **Feature Extraction:** Functions for calculating necessary features.
+- **Model Training:** Function for training and evaluating the Random Forest model.
+- **Maneuver Detection:** Function for extracting and listing detected maneuvers.
+- **Visualization:** Function for plotting results.
+
+## Assumptions
+
+1. **Data Format:** Assumes the dataset is in CSV format with appropriate columns.
+2. **Label Column:** Assumes availability of a label column; synthetic labels are used here for demonstration.
+3. **Model Suitability:** Assumes that the Random Forest Classifier is suitable for the task.
+
+## Contributing
+
+Feel free to contribute by submitting issues or pull requests. Your feedback and suggestions are welcome!
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-
 
  
 
