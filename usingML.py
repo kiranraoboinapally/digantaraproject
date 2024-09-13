@@ -15,6 +15,7 @@ def load_data(file_path):
     
     # Create separate Date and Time columns
     df['Date'] = df['Datetime'].dt.date
+    df['Month'] = df['Datetime'].dt.to_period('M')  # Add a Month column for grouping
     
     # Drop the original DateTime column
     df.drop(['Datetime'], axis=1, inplace=True)
@@ -74,8 +75,12 @@ def train_model(features, df):
 # Extract Dates with Detected Maneuvers
 def extract_maneuver_dates(df, features):
     # Filter rows where maneuvers are detected (predicted_label == 1)
-    maneuver_dates = df[features['predicted_label'] == 1][['Date']]
-    return maneuver_dates
+    maneuvers = df[features['predicted_label'] == 1]
+    
+    # Keep only one maneuver per month
+    maneuvers = maneuvers.drop_duplicates(subset='Month', keep='first')
+    
+    return maneuvers[['Date']]
 
 # Plot Results
 def plot_results(df, features):
@@ -85,7 +90,7 @@ def plot_results(df, features):
     plt.plot(df['Date'], df['SMA'], label='SMA', color='blue')
     
     # Highlight the maneuvers
-    maneuvers = df[features['predicted_label'] == 1]
+    maneuvers = df[features['predicted_label'] == 1].drop_duplicates(subset='Month', keep='first')
     plt.scatter(maneuvers['Date'], maneuvers['SMA'], color='red', label='Detected Maneuvers', zorder=5)
     
     plt.xlabel('Date')
@@ -114,5 +119,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
