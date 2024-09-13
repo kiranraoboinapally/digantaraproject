@@ -7,13 +7,22 @@ import matplotlib.pyplot as plt
 
 # Data Preprocessing
 def load_data(file_path):
+    """
+    Load the data from a CSV file and preprocess it.
+    
+    Parameters:
+    file_path (str): Path to the CSV file containing the data.
+    
+    Returns:
+    pd.DataFrame: Preprocessed DataFrame.
+    """
     df = pd.read_csv(file_path)
     print(df.columns)  # Print column names for verification
     
     # Convert the DateTime column to datetime format
     df['Datetime'] = pd.to_datetime(df['Datetime'], errors='coerce')
     
-    # Create separate Date and Time columns
+    # Create separate Date and Month columns
     df['Date'] = df['Datetime'].dt.date
     df['Month'] = df['Datetime'].dt.to_period('M')  # Add a Month column for grouping
     
@@ -23,28 +32,54 @@ def load_data(file_path):
     return df
 
 def preprocess_data(df):
+    """
+    Compute additional features related to SMA differences.
+    
+    Parameters:
+    df (pd.DataFrame): DataFrame with SMA column.
+    
+    Returns:
+    pd.DataFrame: DataFrame with additional features.
+    """
     df['SMA_diff'] = df['SMA'].diff().fillna(0)
     df['SMA_diff_diff'] = df['SMA_diff'].diff().fillna(0)
     return df
 
 # Feature Extraction
 def extract_features(df):
+    """
+    Extract features for model training.
+    
+    Parameters:
+    df (pd.DataFrame): DataFrame with preprocessed data.
+    
+    Returns:
+    pd.DataFrame: DataFrame with features and placeholder labels.
+    """
     features = pd.DataFrame()
     features['SMA'] = df['SMA']
     features['SMA_diff'] = df['SMA_diff']
     features['SMA_diff_diff'] = df['SMA_diff_diff']
     
-    # Placeholder for labels (for training the model)
-    features['label'] = np.nan  # Initialize with NaN as we will not use heuristics for labeling
+    # Placeholder for labels (to be filled with synthetic labels)
+    features['label'] = np.nan
     
     return features
 
 # Maneuver Detection with Machine Learning
 def train_model(features, df):
-    # In this case, we'll need labeled data to train our model. For this example, 
-    # I'll create synthetic labels for the purpose of demonstration.
-    # In a real-world scenario, you should use actual labeled data for training.
-    features['label'] = np.where(features['SMA_diff_diff'] > 0.1, 1, 0)  # Synthetic label for illustration
+    """
+    Train a Random Forest Classifier to detect maneuvers.
+    
+    Parameters:
+    features (pd.DataFrame): DataFrame with features and synthetic labels.
+    df (pd.DataFrame): DataFrame with original data.
+    
+    Returns:
+    pd.DataFrame: DataFrame with predicted labels.
+    """
+    # Generate synthetic labels for demonstration purposes
+    features['label'] = np.where(features['SMA_diff_diff'] > 0.1, 1, 0)
     
     X = features[['SMA', 'SMA_diff', 'SMA_diff_diff']]
     y = features['label']
@@ -74,6 +109,16 @@ def train_model(features, df):
 
 # Extract Dates with Detected Maneuvers
 def extract_maneuver_dates(df, features):
+    """
+    Extract dates where maneuvers are detected.
+    
+    Parameters:
+    df (pd.DataFrame): DataFrame with original data.
+    features (pd.DataFrame): DataFrame with predicted labels.
+    
+    Returns:
+    pd.DataFrame: DataFrame with dates of detected maneuvers.
+    """
     # Filter rows where maneuvers are detected (predicted_label == 1)
     maneuvers = df[features['predicted_label'] == 1]
     
@@ -84,6 +129,13 @@ def extract_maneuver_dates(df, features):
 
 # Plot Results
 def plot_results(df, features):
+    """
+    Plot the SMA values and highlight detected maneuvers.
+    
+    Parameters:
+    df (pd.DataFrame): DataFrame with original data.
+    features (pd.DataFrame): DataFrame with predicted labels.
+    """
     plt.figure(figsize=(14, 7))
     
     # Plot the SMA values
@@ -104,6 +156,9 @@ def plot_results(df, features):
 
 # Main function
 def main():
+    """
+    Main function to execute the project workflow.
+    """
     file_path = 'SMA_data.csv'  # Replace with the actual file path
     df = load_data(file_path)
     df = preprocess_data(df)
