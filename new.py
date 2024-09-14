@@ -204,12 +204,8 @@ def main():
     plot_results(df, features)
     save_maneuver_dates(maneuver_dates)
     
-
-    ## Print the final highlighted message
-    print("\n" + "="*70)
-    print(" "*10 + "Check the output autosaved in the output folder." + " "*10)
-    print("="*70 + "\n")
-
+    # Print the final message
+    print("Check the output autosaved in the output folder.")
 
 if __name__ == "__main__":
     main()
