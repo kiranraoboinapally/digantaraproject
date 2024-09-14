@@ -1,3 +1,16 @@
+
+# Digantara Project
+
+## Repository Metrics
+
+![GitHub Stars](https://img.shields.io/github/stars/kiranraoboinapally/digantaraproject?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/kiranraoboinapally/digantaraproject?style=social)
+
+## Visitor Count
+
+![Visitor Count](https://badgen.net/github/visitors/kiranraoboinapally/digantaraproject)
+
+
  Assessment Project for the Data Science Intern Role at Digantara:
 
 ---
